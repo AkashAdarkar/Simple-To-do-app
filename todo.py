@@ -1,8 +1,13 @@
 def list_all_task():
-    pass
+    for task in task_list:
+        print(task)
+    
 
 def add_task():
-    pass
+    task = input("")
+    task_list.append(task)
+    list_all_task()
+
 
 def mark_task():
     pass
@@ -11,6 +16,7 @@ def mark_task():
 
 
 while True:
+    task_list = []
     print("A To-Do App")
     print("""1\t list all tasks \n2\t add new tasks \n3\t mark as completed \n4\t exit""")
     
@@ -21,7 +27,7 @@ while True:
         case '2':
             add_task()
         case '3':
-            mark_task
+            mark_task()
         case '4':
             break
     
