@@ -10,14 +10,12 @@ def list_all_task():
 
 
 def add_task():
-    task = input("")
+    task = input("enter your task:")
     task_list.append(task)
 
     print(task_list)
 
-    with open ("tasks.txt","w") as file: # save the list to a file
-        file.write("\n".join(task_list)) #list->str
-        file.write("\n")
+    
     # list_all_task()
     
 
@@ -31,7 +29,10 @@ def delete_task():
 def mark_task():
     print("\u2705")
 
-
+def save_task():
+    with open ("tasks.txt","a") as file: # save the list to a file
+        file.write("\n".join(task_list)) #list->str
+        file.write("\n")
 # over this func we can use time module to mark the date and time of when the task was completed.
 
 while True:
@@ -51,4 +52,5 @@ while True:
         case "4":
             delete_task()
         case "5":
+            save_task()
             break
