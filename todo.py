@@ -1,5 +1,10 @@
 task_list = []
 
+with open("tasks.txt","r") as file:
+    for line in file:
+        task_list.append(line.replace("\n",""))
+
+print(task_list)
 
 def list_all_task():
     # print(task_list)
