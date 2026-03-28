@@ -15,29 +15,45 @@ def list_all_task():
 
 
 def add_task():
-    task = input("enter your task:")
-    task_list.append(task)
-
-    print(task_list)
-
-    
+    with open("tasks.txt","a") as file :
+        task = input("enter a task: ")
+        file.write(task+'\n')
+        task_list.append(task)
     # list_all_task()
     
-
+def save_task():
+    pass
 
 def delete_task():
-    option = input("enter an index: ")
-    task_list.pop(int(option))
+    list_all_task()
+    option = input("enter task no. to delete: ")
+    task_list.pop(int(option)-1)
+    print(task_list)
+    with open("tasks.txt","w") as file:
+        for task in task_list:
+            file.write(task+"\n")
+            
     
 
 
 def mark_task():
-    print("\u2705")
+    list_all_task()
+    option = input("enter task no. to mark complete: ")
+    for idx ,task in enumerate(task_list):
+        if idx == int(option)-1 :
+            # print(f'{task} "\u2705"')
+            task_list[idx] = f'{task} \u2705'
 
-def save_task():
-    with open ("tasks.txt","a") as file: # save the list to a file
-        file.write("\n".join(task_list)) #list->str
-        file.write("\n")
+    print(task_list)
+    with open('tasks.txt','w') as file:
+        for task in task_list:
+            file.write(task+'\n')
+    # print("\u2705")
+
+
+
+
+        
 # over this func we can use time module to mark the date and time of when the task was completed.
 
 while True:
