@@ -33,8 +33,8 @@ def delete_task():
         # raise ValueError(f"invalid {option=}")
         raise OptionError(f"invalid {option=} err from class")
     else:
-        task_list.pop(int(option)-1)
-        print(task_list)
+        popped_item=task_list.pop(int(option)-1)
+        print(f'\"{popped_item}\" has been deleted')
         with open("tasks.txt","w") as file:
             for task in task_list:
                 file.write(task+"\n")
@@ -85,8 +85,6 @@ while True:
             except OptionError as err:
                 print(err)
                 list_all_task()
-            else:
-                print(delete_task())
         case "5":
             save_task()
             break
