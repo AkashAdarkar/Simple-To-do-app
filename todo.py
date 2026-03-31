@@ -1,4 +1,6 @@
 task_list = []
+class OptionError(Exception):
+    """Invalid Option"""
 
 with open("tasks.txt","r") as file:
     for line in file:
@@ -23,15 +25,21 @@ def add_task():
     
 def save_task():
     pass
-#new bramch
+
 def delete_task():
     list_all_task()
     option = input("enter task no. to delete: ")
-    task_list.pop(int(option)-1)
-    print(task_list)
-    with open("tasks.txt","w") as file:
-        for task in task_list:
-            file.write(task+"\n")
+    if ((int(option)-1) >= len(task_list)):
+        # raise ValueError(f"invalid {option=}")
+        raise OptionError(f"invalid {option=} err from class")
+    else:
+        task_list.pop(int(option)-1)
+        print(task_list)
+        with open("tasks.txt","w") as file:
+            for task in task_list:
+                file.write(task+"\n")
+    
+    
             
     
 
@@ -71,7 +79,14 @@ while True:
         case "3":
             mark_task()
         case "4":
-            delete_task()
+            try:
+                delete_task()
+            # except ValueError as err:
+            except OptionError as err:
+                print(err)
+                list_all_task()
+            else:
+                print(delete_task())
         case "5":
             save_task()
             break
