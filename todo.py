@@ -2,6 +2,11 @@ task_list = []
 class OptionError(Exception):
     """Invalid Option"""
 
+def save_task():
+    with open('tasks.txt','w') as file:
+        for task in task_list:
+            file.write(task+'\n')
+
 with open("tasks.txt","r") as file:
     for line in file:
         task_list.append(line.replace("\n",""))
@@ -17,14 +22,13 @@ def list_all_task():
 
 
 def add_task():
-    with open("tasks.txt","a") as file :
-        task = input("enter a task: ")
-        file.write(task+'\n')
-        task_list.append(task)
-    # list_all_task()
+    # with open("tasks.txt","a") as file :
+    task = input("enter a task: ")
+    # file.write(task+'\n')
+    task_list.append(task)
+    save_task()
+    list_all_task()
     
-def save_task():
-    pass
 
 def delete_task():
     list_all_task()
@@ -35,27 +39,21 @@ def delete_task():
     else:
         popped_item=task_list.pop(int(option)-1)
         print(f'\"{popped_item}\" has been deleted')
-        with open("tasks.txt","w") as file:
-            for task in task_list:
-                file.write(task+"\n")
-    
-    
-            
-    
-
+        save_task()
 
 def mark_task():
     list_all_task()
     option = input("enter task no. to mark complete: ")
-    for idx ,task in enumerate(task_list):
-        if idx == int(option)-1 :
-            # print(f'{task} "\u2705"')
-            task_list[idx] = f'{task} \u2705'
+    if ((int(option)-1) < 0 )|((int(option)-1) >= len(task_list)):  
+        raise OptionError(f"Invalid {option=}")
+    else:
+        for idx ,task in enumerate(task_list):
+            if idx == int(option)-1 :
+                # print(f'{task} "\u2705"')
+                task_list[idx] = f'{task} \u2705'
 
     print(task_list)
-    with open('tasks.txt','w') as file:
-        for task in task_list:
-            file.write(task+'\n')
+    save_task()
     # print("\u2705")
 
 
@@ -65,9 +63,16 @@ def mark_task():
 # over this func we can use time module to mark the date and time of when the task was completed.
 
 while True:
-    print("A To-Do App")
+    
     print(
-        """1\t list all tasks \n2\t add new tasks \n3\t mark as completed \n4\t delete task \n5\t exit"""
+        """
+A To-Do App
+-------------------
+1: list all tasks 
+2: add new tasks 
+3: mark as completed 
+4: delete task 
+5: exit"""
     )
 
     option = input("select an option: ")
@@ -77,7 +82,11 @@ while True:
         case "2":
             add_task()
         case "3":
-            mark_task()
+            try:
+                mark_task()
+            except OptionError as err:
+                print(err)
+                list_all_task()
         case "4":
             try:
                 delete_task()
@@ -85,6 +94,9 @@ while True:
             except OptionError as err:
                 print(err)
                 list_all_task()
-        case "5":
-            save_task()
+        # case "5":
+        #     save_task()
+            # break
+        case _:
+            print("Invalid Option")
             break
