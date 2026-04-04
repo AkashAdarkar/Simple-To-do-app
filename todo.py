@@ -1,14 +1,14 @@
 from datetime import date
 import json
-task_list = []  # convert this to dict
+  # convert this to dict
 
 
 class OptionError(Exception):
     """Invalid Option"""
 
 
-def save_task():
-    with open('tasks.json','r') as file:
+def save_task(task_list):
+    with open('tasks.json','w') as file:
         json.dump(task_list,file,indent = 4,sort_keys=False)
 
 
@@ -24,13 +24,11 @@ def load_task():
 
 
 def list_all_task(task_list):
-    # print(task_list)
-    with open("tasks.txt", "r") as file:
-        for idx, line in enumerate(file, start=1):
-            print(f"{idx}:{line}")
+    for task in task_list:
+        print(task)
 
 
-def add_task(tasks_list):
+def add_task(task_list):
     task_desc = input("Enter a task: ")
     task_id = len(task_list)+1
     task = {
@@ -74,7 +72,7 @@ def mark_task():
 
 # over this func we can use time module to mark the date and time of when the task was completed.
 def main():
-    load_task()
+    task_list = load_task()
     while True:
         print(
             """
@@ -89,9 +87,9 @@ A To-Do App
         option = input("select an option: ")
         match option:
             case "1":
-                list_all_task()
+                list_all_task(task_list)
             case "2":
-                add_task()
+                add_task(task_list)
             case "3":
                 try:
                     mark_task()
