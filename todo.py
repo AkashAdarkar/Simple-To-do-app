@@ -1,76 +1,87 @@
 from datetime import date
-task_list = []
+
+task_list = []  # convert this to dict
+
+
 class OptionError(Exception):
     """Invalid Option"""
 
+
 def save_task():
-    with open('tasks.txt','w') as file:
+    with open("tasks.txt", "w") as file:
         for task in task_list:
             file.write(f"{task}{'\n'}")
 
+
 def load_task():
-    with open("tasks.txt","r") as file:
+    with open("tasks.txt", "r") as file:
         for line in file:
-            task_list.append(line.replace("\n",""))
+            task_list.append(line.replace("\n", ""))
 
     print(task_list)
 
-def list_all_task():
+
+def list_all_task(task_list):
     # print(task_list)
-    with open("tasks.txt","r") as file:
-        for idx,line in enumerate(file,start = 1):
+    with open("tasks.txt", "r") as file:
+        for idx, line in enumerate(file, start=1):
             print(f"{idx}:{line}")
-# read this from file rather this non-persistent list
 
 
-def add_task():
-    # with open("tasks.txt","a") as file :
-    task = input("enter a task: ")
-    # file.write(task+'\n')
-    task_list.append(task+" added on "+str(date.today()))
-    save_task()
-    list_all_task()
-    
+def add_task(tasks_list):
+    task_desc = input("Enter a task: ")
+    task_id = len(task_list)+1
+    task = {
+        "task_id":task_id,
+        "task_description":task_desc,
+        "date_added":str(date.today()),
+        "date_updated":str(date.today()),
+        "status":False
+    }
+    task_list.append(task)
+    save_task(task_list)
+
 
 def delete_task():
     list_all_task()
     option = input("enter task no. to delete: ")
-    if ((int(option)-1) >= len(task_list)):
+    if (int(option) - 1) >= len(task_list):
         # raise ValueError(f"invalid {option=}")
-        raise OptionError(f"invalid {option=} err from class")
+        raise OptionError(f"invalid {option=}")
     else:
-        popped_item=task_list.pop(int(option)-1)
-        print(f'\"{popped_item}\" has been deleted')
+        popped_item = task_list.pop(int(option) - 1)
+        print(f'"{popped_item}" has been deleted')
         save_task()
+
 
 def mark_task():
     list_all_task()
     option = input("enter task no. to mark complete: ")
-    if ((int(option)-1) < 0 )|((int(option)-1) >= len(task_list)):  
+    if ((int(option) - 1) < 0) | ((int(option) - 1) >= len(task_list)):
         raise OptionError(f"Invalid {option=}")
     else:
-        for idx ,task in enumerate(task_list):
-            if idx == int(option)-1 :
+        for idx, task in enumerate(task_list):
+            if idx == int(option) - 1:
                 # print(f'{task} "\u2705"')
-                task_list[idx] = f'{task} \u2705 updated on {date.today()} '
+                task_list[idx] = f"{task} \u2705 updated on {date.today()} "
 
     print(task_list)
     save_task()
     # print("\u2705")
-  
+
+
 # over this func we can use time module to mark the date and time of when the task was completed.
 def main():
     load_task()
     while True:
-        
         print(
             """
 A To-Do App
 -------------------
-1: list all tasks 
-2: add new tasks 
-3: mark as completed 
-4: delete task 
+1: list all tasks
+2: add new tasks
+3: mark as completed
+4: delete task
 5: exit"""
         )
         option = input("select an option: ")
@@ -94,10 +105,11 @@ A To-Do App
                     list_all_task()
             # case "5":
             #     save_task()
-                # break
+            # break
             case _:
                 print("Invalid Option")
                 break
+
 
 if __name__ == "__main__":
     main()
