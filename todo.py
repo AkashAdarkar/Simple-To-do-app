@@ -13,11 +13,14 @@ def save_task():
 
 
 def load_task():
-    with open("tasks.txt", "r") as file:
-        for line in file:
-            task_list.append(line.replace("\n", ""))
+    try:
+        with open('tasks.json','r') as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+    except json.JSONDecodeError:
+        return [] 
 
-    print(task_list)
 
 
 def list_all_task(task_list):
