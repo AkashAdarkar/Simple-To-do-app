@@ -1,5 +1,5 @@
 from datetime import date
-
+import json
 task_list = []  # convert this to dict
 
 
@@ -8,9 +8,8 @@ class OptionError(Exception):
 
 
 def save_task():
-    with open("tasks.txt", "w") as file:
-        for task in task_list:
-            file.write(f"{task}{'\n'}")
+    with open('tasks.json','r') as file:
+        json.dump(task_list,file,indent = 4,sort_keys=False)
 
 
 def load_task():
