@@ -42,31 +42,39 @@ def add_task(task_list):
     save_task(task_list)
 
 
-def delete_task():
-    list_all_task()
-    option = input("enter task no. to delete: ")
+def delete_task(task_list):
+    list_all_task(task_list)
+    option = input("enter task id. to delete: ")
     if (int(option) - 1) >= len(task_list):
         # raise ValueError(f"invalid {option=}")
         raise OptionError(f"invalid {option=}")
     else:
         popped_item = task_list.pop(int(option) - 1)
         print(f'"{popped_item}" has been deleted')
-        save_task()
+        for task in task_list :
+            if task["task_id"] < int(option):
+                continue
+            else:
+                task["task_id"] = task["task_id"]-1
+        # task_list[int(option)-1]["task_id"] = 
+        save_task(task_list)
 
 
-def mark_task():
-    list_all_task()
+
+def mark_task(task_list):
+    list_all_task(task_list)
     option = input("enter task no. to mark complete: ")
     if ((int(option) - 1) < 0) | ((int(option) - 1) >= len(task_list)):
         raise OptionError(f"Invalid {option=}")
     else:
-        for idx, task in enumerate(task_list):
-            if idx == int(option) - 1:
-                # print(f'{task} "\u2705"')
-                task_list[idx] = f"{task} \u2705 updated on {date.today()} "
+        # for idx, task in enumerate(task_list):
+        #     if idx == int(option) - 1:
+        #         print(f'{task} "\u2705"')
+        #         task_list[idx] = f"{task} \u2705 updated on {date.today()} "
+        task_list[int(option)-1]["status"] = True
 
     print(task_list)
-    save_task()
+    save_task(task_list)
     # print("\u2705")
 
 
@@ -92,17 +100,17 @@ A To-Do App
                 add_task(task_list)
             case "3":
                 try:
-                    mark_task()
+                    mark_task(task_list)
                 except OptionError as err:
                     print(err)
-                    list_all_task()
+                    list_all_task(task_list)
             case "4":
                 try:
-                    delete_task()
+                    delete_task(task_list)
                 # except ValueError as err:
                 except OptionError as err:
                     print(err)
-                    list_all_task()
+                    list_all_task(task_list)
             case "5":
                 break
             case _:
