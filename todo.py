@@ -103,9 +103,8 @@ A To-Do App
                 except OptionError as err:
                     print(err)
                     list_all_task()
-            # case "5":
-            #     save_task()
-            # break
+            case "5":
+                break
             case _:
                 print("Invalid Option")
                 break

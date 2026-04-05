@@ -25,7 +25,7 @@ from datetime import date
 # # print(task_dict[1]["task_desc"])
 
 
-print({i:i for i in range(1,10)})
+# print({i:i for i in range(1,10)})
 task_list = []  
 task_dict = {}
 
@@ -43,8 +43,8 @@ def add_task(task_list):
 
     task_list.append(task_dict)
 
-    print(task_dict)    
-    print(task_list)  
+    # print(task_dict)    
+    # print(task_list)  
     save_task(task_list)
     
 def save_task(task_list):
@@ -53,7 +53,7 @@ def save_task(task_list):
 
 def load_tasks():
     try:
-        with open('task.json','r') as file:
+        with open('tasks.json','r') as file:
             for task in file:
                 task_list.append(task)
     except FileNotFoundError :
@@ -63,10 +63,10 @@ def load_tasks():
 
 
 
-add_task(task_list)
 load_tasks()
-add_task(task_list)   
-print(task_list)  
+add_task(task_list)
+# add_task(task_list)   
+print(task_list[0])  
 # print(task_list[0][1])
 
 # task_id = 1

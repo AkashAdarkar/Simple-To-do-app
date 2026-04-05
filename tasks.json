@@ -1,1 +1,16 @@
-[{1: {'task_desc': 'water', 'date_added': datetime.date(2026, 4, 3), 'date_updated': datetime.date(2026, 4, 3), 'status': False}}, {1: {'task_desc': 'water water', 'date_added': datetime.date(2026, 4, 3), 'date_updated': datetime.date(2026, 4, 3), 'status': False}}]
+[
+    {
+        "task_id": 1,
+        "task_description": "watch wat",
+        "date_added": "2026-04-04",
+        "date_updated": "2026-04-04",
+        "status": false
+    },
+    {
+        "task_id": 2,
+        "task_description": "errr",
+        "date_added": "2026-04-04",
+        "date_updated": "2026-04-04",
+        "status": false
+    }
+]
