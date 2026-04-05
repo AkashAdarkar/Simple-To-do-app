@@ -1,4 +1,4 @@
-from datetime import date
+import datetime
 import json
   # convert this to dict
 
@@ -34,8 +34,8 @@ def add_task(task_list):
     task = {
         "task_id":task_id,
         "task_description":task_desc,
-        "date_added":str(date.today()),
-        "date_updated":str(date.today()),
+        "date_added":str(datetime.date.today()),# how can make it constant ?
+        "date_updated":str(datetime.date.today()),
         "status":False
     }
     task_list.append(task)
@@ -72,6 +72,8 @@ def mark_task(task_list):
         #         print(f'{task} "\u2705"')
         #         task_list[idx] = f"{task} \u2705 updated on {date.today()} "
         task_list[int(option)-1]["status"] = True
+        x = datetime.datetime.now()
+        task_list[int(option)-1]["date_updated"] = str(x.strftime("%x %I:%M:%p"))
 
     print(task_list)
     save_task(task_list)
