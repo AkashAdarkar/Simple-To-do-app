@@ -31,11 +31,12 @@ def list_all_task(task_list):
 def add_task(task_list):
     task_desc = input("Enter a task: ")
     task_id = len(task_list)+1
+    time = datetime.datetime.now()
     task = {
         "task_id":task_id,
         "task_description":task_desc,
-        "date_added":str(datetime.date.today()),# how can make it constant ?
-        "date_updated":str(datetime.date.today()),
+        "added_on":str(time.strftime("%x %I:%M:%p")),# how can make it constant ?
+        "updated_on":str(datetime.date.today()),
         "status":False
     }
     task_list.append(task)
@@ -72,8 +73,8 @@ def mark_task(task_list):
         #         print(f'{task} "\u2705"')
         #         task_list[idx] = f"{task} \u2705 updated on {date.today()} "
         task_list[int(option)-1]["status"] = True
-        x = datetime.datetime.now()
-        task_list[int(option)-1]["date_updated"] = str(x.strftime("%x %I:%M:%p"))
+        time = datetime.datetime.now()
+        task_list[int(option)-1]["updated_on"] = str(time.strftime("%x %I:%M:%p"))
 
     print(task_list)
     save_task(task_list)
