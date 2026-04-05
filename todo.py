@@ -25,7 +25,8 @@ def load_task():
 
 def list_all_task(task_list):
     for task in task_list:
-        print(task)
+        # print(task)
+        print(f"[{task['task_id']}] {task['task_description']} — {'✅' if task['status'] else '❌'}")
 
 
 def add_task(task_list):
@@ -35,8 +36,8 @@ def add_task(task_list):
     task = {
         "task_id":task_id,
         "task_description":task_desc,
-        "added_on":str(time.strftime("%x %I:%M:%p")),# how can make it constant ?
-        "updated_on":str(time.strftime("%x %I:%M:%p")),
+        "added_on":time.strftime("%x %I:%M:%p"),
+        "updated_on":time.strftime("%x %I:%M:%p"),
         "status":False
     }
     task_list.append(task)
@@ -52,12 +53,8 @@ def delete_task(task_list):
     else:
         popped_item = task_list.pop(int(option) - 1)
         print(f'"{popped_item}" has been deleted')
-        for task in task_list :
-            if task["task_id"] < int(option):
-                continue
-            else:
-                task["task_id"] = task["task_id"]-1
-        # task_list[int(option)-1]["task_id"] = 
+        for i, task in enumerate(task_list):
+            task["task_id"] = i + 1
         save_task(task_list)
 
 
@@ -74,10 +71,10 @@ def mark_task(task_list):
         #         task_list[idx] = f"{task} \u2705 updated on {date.today()} "
         task_list[int(option)-1]["status"] = True
         time = datetime.datetime.now()
-        task_list[int(option)-1]["updated_on"] = str(time.strftime("%x %I:%M:%p"))
+        task_list[int(option)-1]["updated_on"] = time.strftime("%x %I:%M:%p")
         print(f'{task_list[int(option)-1]} has been marked as complete')
 
-    print(task_list)
+    list_all_task(task_list)
     save_task(task_list)
     # print("\u2705")
 
