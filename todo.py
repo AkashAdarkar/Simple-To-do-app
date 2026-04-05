@@ -36,7 +36,7 @@ def add_task(task_list):
         "task_id":task_id,
         "task_description":task_desc,
         "added_on":str(time.strftime("%x %I:%M:%p")),# how can make it constant ?
-        "updated_on":str(datetime.date.today()),
+        "updated_on":str(time.strftime("%x %I:%M:%p")),
         "status":False
     }
     task_list.append(task)
@@ -75,12 +75,14 @@ def mark_task(task_list):
         task_list[int(option)-1]["status"] = True
         time = datetime.datetime.now()
         task_list[int(option)-1]["updated_on"] = str(time.strftime("%x %I:%M:%p"))
+        print(f'{task_list[int(option)-1]} has been marked as complete')
 
     print(task_list)
     save_task(task_list)
     # print("\u2705")
 
-
+def update_task():
+    pass
 # over this func we can use time module to mark the date and time of when the task was completed.
 def main():
     task_list = load_task()
