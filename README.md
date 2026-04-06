@@ -37,3 +37,34 @@ python todo.py
 
 ---
 
+## Usage
+
+```
+A To-Do App
+-------------------
+1: list all tasks
+2: add new tasks
+3: mark as completed
+4: delete task
+5: exit
+```
+
+Select an option by entering its number and pressing Enter.
+
+### Example session
+
+```
+select an option: 2
+Enter a task: Buy groceries
+
+select an option: 1
+[1] Buy groceries — ❌
+
+select an option: 3
+[1] Buy groceries — ❌
+enter task no. to mark complete: 1
+[1] Buy groceries — ✅
+```
+
+---
+
