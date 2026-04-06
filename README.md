@@ -1,16 +1,4 @@
-# Simple-To-do-app
+# ✅ CLI To-Do App
 
-```code```
---
-*italics*
---
-**bold**
---
+A lightweight, terminal-based task manager written in Python. Tasks persist across sessions using a local JSON file — no database, no dependencies, no fluff.
 
-<ol>
-<li>number
-</ol>
-
-<ul>
-<li>un-ordered
-</ul>
