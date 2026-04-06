@@ -85,4 +85,25 @@ Tasks are saved to `tasks.json` in the project directory. Each task has the foll
 > `tasks.json` is auto-created on first use. You can add it to `.gitignore` if you don't want your tasks committed.
 
 ---
+## Project Structure
 
+```
+.
+├── todo.py        # Main application
+├── tasks.json     # Auto-generated task storage (gitignore recommended)
+└── README.md
+```
+
+---
+
+## Known Limitations
+
+- No `update task` feature yet (coming soon)
+- Task IDs are position-based — deleting a task re-indexes everything
+- No support for priorities, due dates, or categories
+
+---
+
+## License
+
+MIT
