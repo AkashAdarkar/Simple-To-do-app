@@ -68,3 +68,21 @@ enter task no. to mark complete: 1
 
 ---
 
+## Data Storage
+
+Tasks are saved to `tasks.json` in the project directory. Each task has the following structure:
+
+```json
+{
+    "task_id": 1,
+    "task_description": "Buy groceries",
+    "added_on": "04/06/26 09:30:AM",
+    "updated_on": "04/06/26 09:35:AM",
+    "status": false
+}
+```
+
+> `tasks.json` is auto-created on first use. You can add it to `.gitignore` if you don't want your tasks committed.
+
+---
+
